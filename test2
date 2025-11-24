@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Presentes do Novo Lar (Compartilhada)</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 5px;
+        }
+        h2 {
+            color: #555;
+            font-size: 1.2em;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+        .item-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        .item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .item:hover:not(.reserved) {
+            background-color: #f9f9f9;
+        }
+        /* Estilo para item selecionado */
+        .item.selected:not(.reserved) {
+            background-color: #e6ffe6;
+        }
+        /* Estilo para item RESERVADO */
+        .item.reserved {
+            cursor: default;
+        }
+        .item.reserved .item-name {
+            text-decoration: line-through;
+            color: #888;
+            font-style: italic;
+        }
+        .item.reserved .reserved-by {
+            font-size: 0.8em;
+            color: #555;
+            margin-left: 10px;
+        }
+        .item-checkbox {
+            margin-right: 15px;
+            transform: scale(1.5);
+        }
+        .item-name {
+            font-size: 1.1em;
+            font-weight: bold;
+            flex-grow: 1;
+        }
+        .input-group {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .input-group input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .button-save {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+        .button-save:hover {
+            background-color: #45a049;
+        }
+        .message {
+            margin-top: 20px;
+            color: #f44336;
+            font-weight: bold;
+        }
+        .loading {
+            color: #4CAF50;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nosso Chá de Casa Nova! 🥂</h1>
+        <h2>Escolha um presente para nos ajudar a montar nosso novo lar.</h2>
+
+        <div id="loading-message" class="loading">Carregando lista...</div>
+
+        <ul id="gift-list" class="item-list" style="display:none;">
+            <li class="item" data-id="1" data-name="Batedeira Planetária (Branca)">
+                <input type="checkbox" class="item-checkbox">
+                <span class="item-name">Batedeira Planetária (Branca)</span>
+            </li>
+            <li class="item" data-id="2" data-name="Jogo de Panelas Antiaderentes">
+                <input type="checkbox" class="item-checkbox">
+                <span class="item-name">Jogo de Panelas Antiaderentes</span>
+            </li>
+            <li class="item" data-id="3" data-name="Faqueiro para 12 Pessoas">
+                <input type="checkbox" class="item-checkbox">
+                <span class="item-name">Faqueiro para 12 Pessoas</span>
+            </li>
+            <li class="item" data-id="4" data-name="Conjunto de Toalhas de Banho (Azul)">
+                <input type="checkbox" class="item-checkbox">
+                <span class="item-name">Conjunto de Toalhas de Banho (Azul)</span>
+            </li>
+            <li class="item" data-id="5" data-name="Liquidificador de Alta Potência">
+                <input type="checkbox" class="item-checkbox">
+                <span class="item-name">Liquidificador de Alta Potência</span>
+            </li>
+            <li class="item" data-id="6" data-name="Máquina de Café Expresso">
+                <input type="checkbox" class="item-checkbox">
+                <span class="item-name">Máquina de Café Expresso</span>
+            </li>
+            <li class="item" data-id="7" data-name="Aspirador de Pó Robô">
+                <input type="checkbox" class="item-checkbox">
+                <span class="item-name">Aspirador de Pó Robô</span>
+            </li>
+            </ul>
+
+        <div id="reservation-form" style="display:none;">
+            <div class="input-group">
+                <label for="guest-name">Seu Nome:</label>
+                <input type="text" id="guest-name" placeholder="Digite seu nome completo">
+            </div>
+
+            <button id="save-button" class="button-save">Marcar Presente</button>
+        </div>
+
+        <p id="feedback-message" class="message"></p>
+    </div>
+
+    <script>
+        // ===================================================================
+        // 🔑 CREDENCIAIS DO JSONBIN.IO INSERIDAS
+        // ===================================================================
+        const JSONBIN_API_KEY = '$2a$10$id6BPYs5ZTvHYHJ9WU/Jx.dQGhtDo0W0owelrC0fEBW7dOHSQsAEe'; // Sua Master Key
+        const JSONBIN_BIN_ID = '6924a143d0ea881f40fd8c56';     // Seu Bin ID
+        const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
+        // ===================================================================
+
+        const giftListElement = document.getElementById('gift-list');
+        const saveButton = document.getElementById('save-button');
+        const guestNameInput = document.getElementById('guest-name');
+        const feedbackMessage = document.getElementById('feedback-message');
+        const loadingMessage = document.getElementById('loading-message');
+        const reservationForm = document.getElementById('reservation-form');
+
+        let reservedGifts = []; 
+        let selectedGiftId = null; 
+
+        // 1. CARREGAR DADOS DO JSONBIN
+        async function fetchReservedGifts() {
+            try {
+                const response = await fetch(JSONBIN_URL, {
+                    method: 'GET',
+                    headers: {
+                        'X-Master-Key': JSONBIN_API_KEY
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao carregar lista. Status: ' + response.status);
+                }
+
+                const data = await response.json();
+                
+                // ⚠️ AJUSTE FEITO AQUI: Acessando .record.reserved_gifts 
+                // para o formato de Bin que você conseguiu salvar.
+                reservedGifts = data.record.reserved_gifts || []; 
+                
+                updateUI();
+            } catch (error) {
+                console.error('Erro de persistência:', error);
+                feedbackMessage.textContent = 'Erro ao carregar a lista de presentes. Verifique suas chaves e o conteúdo do Bin.';
+                feedbackMessage.style.color = '#f44336';
+            } finally {
+                loadingMessage.style.display = 'none'; // Esconde a mensagem de carregamento
+                giftListElement.style.display = 'block'; // Mostra a lista
+                reservationForm.style.display = 'block'; // Mostra o formulário
+            }
+        }
+
+        // 2. ATUALIZAR INTERFACE DO USUÁRIO (riscar itens)
+        function updateUI() {
+            const allItems = giftListElement.querySelectorAll('.item');
+            
+            allItems.forEach(item => {
+                const itemId = item.dataset.id;
+                const reservation = reservedGifts.find(rg => rg.id === itemId);
+
+                // Se o item estiver reservado
+                if (reservation) {
+                    item.classList.add('reserved');
+                    item.querySelector('.item-checkbox').checked = true;
+                    item.querySelector('.item-checkbox').disabled = true;
+
+                    // Adiciona o nome do reservador
+                    let reservedBySpan = item.querySelector('.reserved-by');
+                    if (!reservedBySpan) {
+                         reservedBySpan = document.createElement('span');
+                         reservedBySpan.classList.add('reserved-by');
+                         item.appendChild(reservedBySpan);
+                    }
+                    reservedBySpan.textContent = `(Reservado por: ${reservation.name})`;
+
+                } else {
+                    // Limpa status de reservado se não estiver na lista
+                    item.classList.remove('reserved');
+                    item.querySelector('.item-checkbox').disabled = false;
+                    const reservedBySpan = item.querySelector('.reserved-by');
+                    if (reservedBySpan) {
+                        reservedBySpan.remove();
+                    }
+                }
+            });
+        }
+
+        // 3. SALVAR NOVOS DADOS NO JSONBIN
+        async function saveReservedGift(newReservation) {
+            reservedGifts.push(newReservation);
+            
+            // Cria o objeto de dados que será enviado (o formato que o Bin espera)
+            const dataToSave = {
+                reserved_gifts: reservedGifts
+            };
+
+            try {
+                const response = await fetch(JSONBIN_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_API_KEY
+                    },
+                    body: JSON.stringify(dataToSave) // Envia o objeto formatado
+                });
+
+                if (!response.ok) {
+                    throw new Error('Falha ao salvar a reserva. Status: ' + response.status);
+                }
+
+                // Sucesso: Atualiza a interface (risca o item)
+                updateUI();
+                feedbackMessage.textContent = `Obrigado, ${newReservation.name}! Seu presente "${newReservation.item}" foi marcado com sucesso para todos os convidados.`;
+                feedbackMessage.style.color = '#4CAF50';
+                
+            } catch (error) {
+                console.error('Erro ao salvar:', error);
+                // Em caso de erro, remove a reserva localmente para evitar inconsistência
+                reservedGifts.pop(); 
+                feedbackMessage.textContent = 'Erro ao salvar. Tente novamente ou verifique as permissões do seu Bin.';
+                feedbackMessage.style.color = '#f44336';
+            }
+        }
+
+        // Event Listeners ==================================================
+
+        // Listener para seleção de item
+        giftListElement.addEventListener('click', function(event) {
+            const clickedItem = event.target.closest('.item');
+            if (!clickedItem || clickedItem.classList.contains('reserved')) {
+                return; 
+            }
+            
+            // Desmarca o item anteriormente selecionado
+            const previousSelected = document.querySelector('.item.selected');
+            if (previousSelected && previousSelected !== clickedItem) {
+                previousSelected.classList.remove('selected');
+                previousSelected.querySelector('.item-checkbox').checked = false;
+            }
+
+            // Alterna a seleção
+            clickedItem.classList.toggle('selected');
+            const checkbox = clickedItem.querySelector('.item-checkbox');
+            checkbox.checked = clickedItem.classList.contains('selected');
+
+            selectedGiftId = clickedItem.classList.contains('selected') ? clickedItem.dataset.id : null;
+        });
+
+        // Listener para o botão de salvar
+        saveButton.addEventListener('click', async function() {
+            const name = guestNameInput.value.trim();
+
+            if (!selectedGiftId) {
+                feedbackMessage.textContent = 'Por favor, selecione um presente na lista.';
+                feedbackMessage.style.color = '#f44336';
+                return;
+            }
+
+            if (!name) {
+                feedbackMessage.textContent = 'Por favor, digite seu nome.';
+                feedbackMessage.style.color = '#f44336';
+                return;
+            }
+            
+            // Cria o objeto de reserva
+            const giftElement = document.querySelector(`.item[data-id="${selectedGiftId}"]`);
+            const newReservation = {
+                id: selectedGiftId,
+                name: name,
+                item: giftElement.dataset.name,
+                date: new Date().toISOString()
+            };
+
+            // Salva no JSONBin
+            saveButton.disabled = true; // Desabilita o botão 
+            feedbackMessage.textContent = 'Reservando presente, aguarde...';
+            
+            await saveReservedGift(newReservation);
+            
+            // Limpa após a reserva
+            guestNameInput.value = '';
+            selectedGiftId = null;
+            saveButton.disabled = false;
+        });
+
+        // INICIA O CARREGAMENTO DA LISTA
+        fetchReservedGifts();
+    </script>
+</body>
+</html>
