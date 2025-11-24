@@ -31,16 +31,6 @@
             margin-top: 0;
             margin-bottom: 30px;
         }
-        /* Estilos para as Categorias */
-        .category-title {
-            color: #2F8D34; /* Um verde um pouco mais escuro para destaque */
-            font-size: 1.5em;
-            margin-top: 40px;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #D4EDDA; /* Linha sutil abaixo do título da categoria */
-            padding-bottom: 5px;
-            text-align: left;
-        }
         .item-list {
             list-style: none;
             padding: 0;
@@ -50,14 +40,10 @@
         .item {
             display: flex;
             align-items: center;
-            padding: 10px 0; /* Padding um pouco menor para mais itens */
-            border-bottom: 1px dashed #eee; /* Borda tracejada para separar melhor */
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
             cursor: pointer;
             transition: background-color 0.2s;
-            font-size: 0.95em; /* Fonte um pouco menor */
-        }
-        .item:last-child {
-            border-bottom: none; /* Remove a borda do último item da lista */
         }
         .item:hover:not(.reserved) {
             background-color: #f9f9f9;
@@ -76,15 +62,16 @@
             font-style: italic;
         }
         .item.reserved .reserved-by {
-            font-size: 0.75em; /* Fonte um pouco menor para o nome do reservador */
+            font-size: 0.8em;
             color: #555;
             margin-left: 10px;
         }
         .item-checkbox {
             margin-right: 15px;
-            transform: scale(1.3); /* Tamanho do checkbox */
+            transform: scale(1.5);
         }
         .item-name {
+            font-size: 1.1em;
             font-weight: bold;
             flex-grow: 1;
         }
@@ -136,379 +123,38 @@
 
         <div id="loading-message" class="loading">Carregando lista...</div>
 
-        <div id="gift-sections" style="display:none;">
-            <h3 class="category-title">COZINHA</h3>
-            <ul id="gift-list-cozinha" class="item-list">
-                <li class="item" data-id="c01" data-name="Abridor">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Abridor</span>
-                </li>
-                <li class="item" data-id="c02" data-name="Afiador de Faca">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Afiador de Faca</span>
-                </li>
-                <li class="item" data-id="c03" data-name="Amassador de Alho">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Amassador de Alho</span>
-                </li>
-                <li class="item" data-id="c04" data-name="Assadeiras (Redon, Retan, Pudim, Pizza)">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Assadeiras (Redon, Retan, Pudim, Pizza)</span>
-                </li>
-                <li class="item" data-id="c05" data-name="Balança">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Balança</span>
-                </li>
-                <li class="item" data-id="c06" data-name="Bule (Chaleira)">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Bule (Chaleira)</span>
-                </li>
-                <li class="item" data-id="c07" data-name="Coador de Café">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Coador de Café</span>
-                </li>
-                <li class="item" data-id="c08" data-name="Colher de Pau">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Colher de Pau</span>
-                </li>
-                <li class="item" data-id="c09" data-name="Escorredor de Louça">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Escorredor de Louça</span>
-                </li>
-                <li class="item" data-id="c10" data-name="Espátula de Margarina">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Espátula de Margarina</span>
-                </li>
-                <li class="item" data-id="c11" data-name="Formas de Gelo">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Formas de Gelo</span>
-                </li>
-                <li class="item" data-id="c12" data-name="Funil">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Funil</span>
-                </li>
-                <li class="item" data-id="c13" data-name="Garrafa de Café">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Garrafa de Café</span>
-                </li>
-                <li class="item" data-id="c14" data-name="Jarra">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Jarra</span>
-                </li>
-                <li class="item" data-id="c15" data-name="Jogo Americano (Mesa)">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Jogo Americano (Mesa)</span>
-                </li>
-                <li class="item" data-id="c16" data-name="Jogo de Copos">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Jogo de Copos</span>
-                </li>
-                <li class="item" data-id="c17" data-name="Jogo de Jantar">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Jogo de Jantar</span>
-                </li>
-                <li class="item" data-id="c18" data-name="Jogo de Panela">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Jogo de Panela</span>
-                </li>
-                <li class="item" data-id="c19" data-name="Jogo de Pratos">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Jogo de Pratos</span>
-                </li>
-                <li class="item" data-id="c20" data-name="Jogo de Sobremesa">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Jogo de Sobremesa</span>
-                </li>
-                <li class="item" data-id="c21" data-name="Jogo de Taças">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Jogo de Taças</span>
-                </li>
-                <li class="item" data-id="c22" data-name="Jogo de Talheres">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Jogo de Talheres</span>
-                </li>
-                <li class="item" data-id="c23" data-name="Jogo de Xícaras">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Jogo de Xícaras</span>
-                </li>
-                <li class="item" data-id="c24" data-name="Kit de Assadeiras">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Kit de Assadeiras</span>
-                </li>
-                <li class="item" data-id="c25" data-name="Kit de Faca">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Kit de Faca</span>
-                </li>
-                <li class="item" data-id="c26" data-name="Kit de Frigideiras">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Kit de Frigideiras</span>
-                </li>
-                <li class="item" data-id="c27" data-name="Kit de Paneiras">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Kit de Paneiras</span>
-                </li>
-                <li class="item" data-id="c28" data-name="Kit de Pia (Lixo, Rodo, etc)">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Kit de Pia (Lixo, Rodo, etc)</span>
-                </li>
-                <li class="item" data-id="c29" data-name="Kit de Talheres Utensílios">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Kit de Talheres Utensílios</span>
-                </li>
-                <li class="item" data-id="c30" data-name="Luva Térmica">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Luva Térmica</span>
-                </li>
-                <li class="item" data-id="c31" data-name="Marmitex (Travessas)">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Marmitex (Travessas)</span>
-                </li>
-                <li class="item" data-id="c32" data-name="Medidores (Copo, etc)">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Medidores (Copo, etc)</span>
-                </li>
-                <li class="item" data-id="c33" data-name="Panela de Pressão">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Panela de Pressão</span>
-                </li>
-                <li class="item" data-id="c34" data-name="Panos de Prato">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Panos de Prato</span>
-                </li>
-                <li class="item" data-id="c35" data-name="Pegador de Sorvete">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Pegador de Sorvete</span>
-                </li>
-                <li class="item" data-id="c36" data-name="Pipoqueira">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Pipoqueira</span>
-                </li>
-                <li class="item" data-id="c37" data-name="Porta Ovos">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Porta Ovos</span>
-                </li>
-                <li class="item" data-id="c38" data-name="Porta Temperos">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Porta Temperos</span>
-                </li>
-                <li class="item" data-id="c39" data-name="Potes de Arroz, etc...">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Potes de Arroz, etc...</span>
-                </li>
-                <li class="item" data-id="c40" data-name="Potes Herméticos Amazon">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Potes Herméticos Amazon</span>
-                </li>
-                <li class="item" data-id="c41" data-name="Ralador">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Ralador</span>
-                </li>
-                <li class="item" data-id="c42" data-name="Rolo">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Rolo</span>
-                </li>
-                <li class="item" data-id="c43" data-name="Saleiro">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Saleiro</span>
-                </li>
-                <li class="item" data-id="c44" data-name="Suporte Papel Toalha">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Suporte Papel Toalha</span>
-                </li>
-                <li class="item" data-id="c45" data-name="Tábua de Carne">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Tábua de Carne</span>
-                </li>
-                <li class="item" data-id="c46" data-name="Tigelas (Bowls)">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Tigelas (Bowls)</span>
-                </li>
+        <ul id="gift-list" class="item-list" style="display:none;">
+            <li class="item" data-id="1" data-name="Batedeira Planetária (Branca)">
+                <input type="checkbox" class="item-checkbox">
+                <span class="item-name">Batedeira Planetária (Branca)</span>
+            </li>
+            <li class="item" data-id="2" data-name="Jogo de Panelas Antiaderentes">
+                <input type="checkbox" class="item-checkbox">
+                <span class="item-name">Jogo de Panelas Antiaderentes</span>
+            </li>
+            <li class="item" data-id="3" data-name="Faqueiro para 12 Pessoas">
+                <input type="checkbox" class="item-checkbox">
+                <span class="item-name">Faqueiro para 12 Pessoas</span>
+            </li>
+            <li class="item" data-id="4" data-name="Conjunto de Toalhas de Banho (Azul)">
+                <input type="checkbox" class="item-checkbox">
+                <span class="item-name">Conjunto de Toalhas de Banho (Azul)</span>
+            </li>
+            <li class="item" data-id="5" data-name="Liquidificador de Alta Potência">
+                <input type="checkbox" class="item-checkbox">
+                <span class="item-name">Liquidificador de Alta Potência</span>
+            </li>
+            <li class="item" data-id="6" data-name="Máquina de Café Expresso">
+                <input type="checkbox" class="item-checkbox">
+                <span class="item-name">Máquina de Café Expresso</span>
+            </li>
+            <li class="item" data-id="7" data-name="Aspirador de Pó Robô">
+                <input type="checkbox" class="item-checkbox">
+                <span class="item-name">Aspirador de Pó Robô</span>
+            </li>
             </ul>
 
-            <h3 class="category-title">ELETRODOMÉSTICOS</h3>
-            <ul id="gift-list-eletrodomesticos" class="item-list">
-                <li class="item" data-id="e01" data-name="Aspirador">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Aspirador</span>
-                </li>
-                <li class="item" data-id="e02" data-name="Airfryer">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Airfryer</span>
-                </li>
-                <li class="item" data-id="e03" data-name="Batedeira">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Batedeira</span>
-                </li>
-                <li class="item" data-id="e04" data-name="Cafeteira">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Cafeteira</span>
-                </li>
-                <li class="item" data-id="e05" data-name="Ferro">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Ferro</span>
-                </li>
-                <li class="item" data-id="e06" data-name="Liquidificador">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Liquidificador</span>
-                </li>
-                <li class="item" data-id="e07" data-name="Micro Ondas">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Micro Ondas</span>
-                </li>
-                <li class="item" data-id="e08" data-name="Mini Processador">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Mini Processador</span>
-                </li>
-                <li class="item" data-id="e09" data-name="Mixer">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Mixer</span>
-                </li>
-                <li class="item" data-id="e10" data-name="Multiprocessador">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Multiprocessador</span>
-                </li>
-                <li class="item" data-id="e11" data-name="Sanduicheira">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Sanduicheira</span>
-                </li>
-            </ul>
-
-            <h3 class="category-title">CAMA, MESA E BANHO</h3>
-            <ul id="gift-list-cama-mesa-banho" class="item-list">
-                <li class="item" data-id="cmb01" data-name="Almofadas">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Almofadas</span>
-                </li>
-                <li class="item" data-id="cmb02" data-name="Cortinas">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Cortinas</span>
-                </li>
-                <li class="item" data-id="cmb03" data-name="Edredom">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Edredom</span>
-                </li>
-                <li class="item" data-id="cmb04" data-name="Lençol e Fronha">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Lençol e Fronha</span>
-                </li>
-                <li class="item" data-id="cmb05" data-name="Passadeira">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Passadeira</span>
-                </li>
-                <li class="item" data-id="cmb06" data-name="Tapetes">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Tapetes</span>
-                </li>
-                <li class="item" data-id="cmb07" data-name="Tapetes de Banheiro">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Tapetes de Banheiro</span>
-                </li>
-                <li class="item" data-id="cmb08" data-name="Toalhas">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Toalhas</span>
-                </li>
-                <li class="item" data-id="cmb09" data-name="Toalha de Mesa">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Toalha de Mesa</span>
-                </li>
-                <li class="item" data-id="cmb10" data-name="Toalha de Rosto">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Toalha de Rosto</span>
-                </li>
-                <li class="item" data-id="cmb11" data-name="Travesseiros">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Travesseiros</span>
-                </li>
-            </ul>
-
-            <h3 class="category-title">BANHEIRO</h3>
-            <ul id="gift-list-banheiro" class="item-list">
-                <li class="item" data-id="b01" data-name="Escova de Privada">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Escova de Privada</span>
-                </li>
-                <li class="item" data-id="b02" data-name="Kit de Banheiro">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Kit de Banheiro</span>
-                </li>
-                <li class="item" data-id="b03" data-name="Lixo de Banheiro">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Lixo de Banheiro</span>
-                </li>
-                <li class="item" data-id="b04" data-name="Tapetes">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Tapetes</span>
-                </li>
-            </ul>
-
-            <h3 class="category-title">ÁREA DE SERVIÇO</h3>
-            <ul id="gift-list-area-servico" class="item-list">
-                <li class="item" data-id="as01" data-name="Bacias">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Bacias</span>
-                </li>
-                <li class="item" data-id="as02" data-name="Baldes">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Baldes</span>
-                </li>
-                <li class="item" data-id="as03" data-name="Pá, Vassoura, Rodo">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Pá, Vassoura, Rodo</span>
-                </li>
-                <li class="item" data-id="as04" data-name="Panos de Chão">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Panos de Chão</span>
-                </li>
-                <li class="item" data-id="as05" data-name="Panos de Microfibra">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Panos de Microfibra</span>
-                </li>
-                <li class="item" data-id="as06" data-name="Prendedores">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Prendedores</span>
-                </li>
-                <li class="item" data-id="as07" data-name="Varal de Calcinhas">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Varal de Calcinhas</span>
-                </li>
-                <li class="item" data-id="as08" data-name="Moop">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Moop</span>
-                </li>
-            </ul>
-
-            <h3 class="category-title">OUTROS</h3>
-            <ul id="gift-list-outros" class="item-list">
-                <li class="item" data-id="o01" data-name="Caixa Organizadora">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Caixa Organizadora</span>
-                </li>
-                <li class="item" data-id="o02" data-name="Extensão">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Extensão</span>
-                </li>
-                <li class="item" data-id="o03" data-name="Kit de Ferramentas">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Kit de Ferramentas</span>
-                </li>
-                <li class="item" data-id="o04" data-name="Mangueira">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Mangueira</span>
-                </li>
-                <li class="item" data-id="o05" data-name="Tábua de Passar Roupa">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Tábua de Passar Roupa</span>
-                </li>
-                <li class="item" data-id="o06" data-name="Organizador de Gaveta">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Organizador de Gaveta</span>
-                </li>
-                <li class="item" data-id="o07" data-name="Organizador Talheres">
-                    <input type="checkbox" class="item-checkbox">
-                    <span class="item-name">Organizador Talheres</span>
-                </li>
-            </ul>
-        </div> <div id="reservation-form">
+        <div id="reservation-form" style="display:none;">
             <div class="input-group">
                 <label for="guest-name">Seu Nome:</label>
                 <input type="text" id="guest-name" placeholder="Digite seu nome completo">
@@ -529,13 +175,12 @@
         const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
         // ===================================================================
 
-        // Ajustado para selecionar todos os itens de todas as listas
-        const allGiftLists = document.querySelectorAll('.item-list'); 
+        const giftListElement = document.getElementById('gift-list');
         const saveButton = document.getElementById('save-button');
         const guestNameInput = document.getElementById('guest-name');
         const feedbackMessage = document.getElementById('feedback-message');
         const loadingMessage = document.getElementById('loading-message');
-        const giftSections = document.getElementById('gift-sections'); // Novo ID para as seções de presentes
+        const reservationForm = document.getElementById('reservation-form');
 
         let reservedGifts = []; 
         let selectedGiftId = null; 
@@ -555,6 +200,9 @@
                 }
 
                 const data = await response.json();
+                
+                // ⚠️ AJUSTE FEITO AQUI: Acessando .record.reserved_gifts 
+                // para o formato de Bin que você conseguiu salvar.
                 reservedGifts = data.record.reserved_gifts || []; 
                 
                 updateUI();
@@ -564,23 +212,26 @@
                 feedbackMessage.style.color = '#f44336';
             } finally {
                 loadingMessage.style.display = 'none'; // Esconde a mensagem de carregamento
-                giftSections.style.display = 'block'; // Mostra as seções de presentes
+                giftListElement.style.display = 'block'; // Mostra a lista
+                reservationForm.style.display = 'block'; // Mostra o formulário
             }
         }
 
         // 2. ATUALIZAR INTERFACE DO USUÁRIO (riscar itens)
         function updateUI() {
-            const allItems = document.querySelectorAll('.item-list .item'); // Seleciona todos os itens em todas as listas
+            const allItems = giftListElement.querySelectorAll('.item');
             
             allItems.forEach(item => {
                 const itemId = item.dataset.id;
                 const reservation = reservedGifts.find(rg => rg.id === itemId);
 
+                // Se o item estiver reservado
                 if (reservation) {
                     item.classList.add('reserved');
                     item.querySelector('.item-checkbox').checked = true;
                     item.querySelector('.item-checkbox').disabled = true;
 
+                    // Adiciona o nome do reservador
                     let reservedBySpan = item.querySelector('.reserved-by');
                     if (!reservedBySpan) {
                          reservedBySpan = document.createElement('span');
@@ -590,6 +241,7 @@
                     reservedBySpan.textContent = `(Reservado por: ${reservation.name})`;
 
                 } else {
+                    // Limpa status de reservado se não estiver na lista
                     item.classList.remove('reserved');
                     item.querySelector('.item-checkbox').disabled = false;
                     const reservedBySpan = item.querySelector('.reserved-by');
@@ -604,6 +256,7 @@
         async function saveReservedGift(newReservation) {
             reservedGifts.push(newReservation);
             
+            // Cria o objeto de dados que será enviado (o formato que o Bin espera)
             const dataToSave = {
                 reserved_gifts: reservedGifts
             };
@@ -615,16 +268,90 @@
                         'Content-Type': 'application/json',
                         'X-Master-Key': JSONBIN_API_KEY
                     },
-                    body: JSON.stringify(dataToSave) 
+                    body: JSON.stringify(dataToSave) // Envia o objeto formatado
                 });
 
                 if (!response.ok) {
                     throw new Error('Falha ao salvar a reserva. Status: ' + response.status);
                 }
 
+                // Sucesso: Atualiza a interface (risca o item)
                 updateUI();
                 feedbackMessage.textContent = `Obrigado, ${newReservation.name}! Seu presente "${newReservation.item}" foi marcado com sucesso para todos os convidados.`;
                 feedbackMessage.style.color = '#4CAF50';
                 
             } catch (error) {
                 console.error('Erro ao salvar:', error);
+                // Em caso de erro, remove a reserva localmente para evitar inconsistência
+                reservedGifts.pop(); 
+                feedbackMessage.textContent = 'Erro ao salvar. Tente novamente ou verifique as permissões do seu Bin.';
+                feedbackMessage.style.color = '#f44336';
+            }
+        }
+
+        // Event Listeners ==================================================
+
+        // Listener para seleção de item
+        giftListElement.addEventListener('click', function(event) {
+            const clickedItem = event.target.closest('.item');
+            if (!clickedItem || clickedItem.classList.contains('reserved')) {
+                return; 
+            }
+            
+            // Desmarca o item anteriormente selecionado
+            const previousSelected = document.querySelector('.item.selected');
+            if (previousSelected && previousSelected !== clickedItem) {
+                previousSelected.classList.remove('selected');
+                previousSelected.querySelector('.item-checkbox').checked = false;
+            }
+
+            // Alterna a seleção
+            clickedItem.classList.toggle('selected');
+            const checkbox = clickedItem.querySelector('.item-checkbox');
+            checkbox.checked = clickedItem.classList.contains('selected');
+
+            selectedGiftId = clickedItem.classList.contains('selected') ? clickedItem.dataset.id : null;
+        });
+
+        // Listener para o botão de salvar
+        saveButton.addEventListener('click', async function() {
+            const name = guestNameInput.value.trim();
+
+            if (!selectedGiftId) {
+                feedbackMessage.textContent = 'Por favor, selecione um presente na lista.';
+                feedbackMessage.style.color = '#f44336';
+                return;
+            }
+
+            if (!name) {
+                feedbackMessage.textContent = 'Por favor, digite seu nome.';
+                feedbackMessage.style.color = '#f44336';
+                return;
+            }
+            
+            // Cria o objeto de reserva
+            const giftElement = document.querySelector(`.item[data-id="${selectedGiftId}"]`);
+            const newReservation = {
+                id: selectedGiftId,
+                name: name,
+                item: giftElement.dataset.name,
+                date: new Date().toISOString()
+            };
+
+            // Salva no JSONBin
+            saveButton.disabled = true; // Desabilita o botão 
+            feedbackMessage.textContent = 'Reservando presente, aguarde...';
+            
+            await saveReservedGift(newReservation);
+            
+            // Limpa após a reserva
+            guestNameInput.value = '';
+            selectedGiftId = null;
+            saveButton.disabled = false;
+        });
+
+        // INICIA O CARREGAMENTO DA LISTA
+        fetchReservedGifts();
+    </script>
+</body>
+</html>
